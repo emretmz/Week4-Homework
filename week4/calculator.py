@@ -10,19 +10,33 @@ This process must continue until user want to quit from calculator.
 """
 import math
 def Addition(x,y):
-    return x+y
+    return math.ceil(x+y)
 def Subtraction(x,y):
-    return x-y
+    return math.ceil(x-y)
 def Multiplication(x,y):
-    return x*y
+    return math.ceil(x*y)
 def Division(x,y):
-    return x/y
+    return math.ceil(x/y)
 print("Select Operation!\n1.Add\n2.Substract\n3.Multiply\n4.Divide\n5.Quit\n")
-choice=input("Enter choice 1/2/3/4")
+try:
+    choice=input("Enter choice 1/2/3/4/5:")
+except TypeError:
+    print("Type Error")      
+except ValueError:
+    print("Please enter a number")  
+    
 while True:
     if choice in  ('1','2','3','4'):
-        num1=float(input("enter first num:"))
-        num2=float(input("enter sec num:"))
+        try:
+            num1=float(input("enter first num:"))
+            num2=float(input("enter sec num:"))
+        except TypeError:
+            print("Type Error")  
+            continue
+        except ValueError:
+            print("Please enter a number")  
+            continue
+
         if choice == '1':
                 print(num1, "+", num2, "=", Addition(num1, num2))
 
@@ -34,10 +48,14 @@ while True:
 
         elif choice == '4':
                 print(num1, "/", num2, "=", Division(num1, num2))
-        
-        next_calculation = input("Let's do next calculation? (yes/no): ")
-            
+ 
+        next_calculation = input("Let's do next calculation? (yes/no): ")       
         if next_calculation == "no":
             break    
+    
+    elif choice== '5':
+        break
+    
     else:
         print("Invalid Input")
+        break
